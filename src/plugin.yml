@@ -1,0 +1,65 @@
+## YAML Template.
+---
+name: Creator
+main: com.mahn42.anhalter42.creator.CreatorPlugin
+version: 0.01
+depend: [MAHN42-Framework]
+commands:
+   c_markpos:
+      description: set current player position for given marker. 
+      usage: /c_markpos <markername>
+      permission: c.markpos
+      permission-message: You don't have permission
+   c_area_save:
+      description: save area given by marker 1 and 2 to given file. 
+      usage: /c_area_save <filename> [<index>|add]
+      permission: c.area_save
+      permission-message: You don't have permission
+   c_area_load:
+      description: load area to player location. 
+      usage: /c_area_load <filename> [<index>|play]
+      permission: c.area_load
+      permission-message: You don't have permission
+   c_area_delete:
+      description: delete area on disk. 
+      usage: /c_area_delete <filename>
+      permission: c.area_delete
+      permission-message: You don't have permission
+   c_area_remove:
+      description: remove part of area on disk. 
+      usage: /c_area_remove <filename> <index>
+      permission: c.area_remove
+      permission-message: You don't have permission
+   c_we_fill:
+      description: fill region marker 1 to marker 2 with given material. 
+      usage: /c_we_fill <materialname> [<rawmetadata>]
+      permission: c.we_fill
+      permission-message: You don't have permission
+permissions:
+    c.*:
+        description: Gives access to all Creator commands
+        children:
+            c.markpos: true
+            c.area_save: true
+            c.area_load: true
+            c.area_delete: true
+            c.area_remove: true
+            c.we_fill: true
+    c.markpos:
+        description: Allows you to set a marker position
+        default: false
+    c.area_save:
+        description: Allows you to save an area
+        default: false
+    c.area_load:
+        description: Allows you to load an area
+        default: false
+    c.area_delete:
+        description: Allows you to delete an area on disk
+        default: false
+    c.area_remove:
+        description: Allows you to remove a part of an area on disk
+        default: false
+    c.we_fill:
+        description: Allows you to fill regions of the world
+        default: false
