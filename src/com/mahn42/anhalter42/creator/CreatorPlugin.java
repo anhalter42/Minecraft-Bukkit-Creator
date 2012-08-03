@@ -20,12 +20,14 @@ public class CreatorPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() { 
-        getCommand("c_markpos").setExecutor(new CommandSetPosMarker());
+        getCommand("c_markpos").setExecutor(new CommandMarkPos());
+        getCommand("c_markbox").setExecutor(new CommandMarkBox());
         getCommand("c_area_load").setExecutor(new CommandAreaLoad());
         getCommand("c_area_save").setExecutor(new CommandAreaSave());
         getCommand("c_area_delete").setExecutor(new CommandAreaDelete());
         getCommand("c_area_remove").setExecutor(new CommandAreaRemove());
         getCommand("c_we_fill").setExecutor(new CommandWorldEditFill());
+        getCommand("c_we_markbox").setExecutor(new CommandWorldEditMarkBox());
     }
 
 }

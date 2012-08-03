@@ -27,13 +27,20 @@ public class CommandWorldEditFill implements CommandExecutor {
             Player lPlayer = (Player) aCommandSender;
             World lWorld = lPlayer.getWorld();
             SyncBlockList lList = new SyncBlockList(lWorld);
-            BlockPosition lEdge1 = Framework.plugin.getPositionMarker("1");
-            BlockPosition lEdge2 = Framework.plugin.getPositionMarker("2");
-            BlockArea lArea = new BlockArea(lWorld, lEdge1, lEdge2);
             byte lData = 0;
             if (aStrings.length > 1) {
                 lData = Byte.parseByte(aStrings[1]);
             }
+            BlockPosition lEdge1;
+            BlockPosition lEdge2;
+            if (aStrings.length > 3) {
+                lEdge1 = Framework.plugin.getPositionMarker(aStrings[2]);
+                lEdge2 = Framework.plugin.getPositionMarker(aStrings[3]);
+            } else {
+                lEdge1 = Framework.plugin.getPositionMarker("1");
+                lEdge2 = Framework.plugin.getPositionMarker("2");
+            }
+            BlockArea lArea = new BlockArea(lWorld, lEdge1, lEdge2);
             Material lMat;
             lMat = Material.getMaterial(aStrings[0]);
             if (lMat == null) {

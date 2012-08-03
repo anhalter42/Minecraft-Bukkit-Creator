@@ -57,21 +57,22 @@ public class CommandAreaLoad implements CommandExecutor {
                         lIndex = Integer.parseInt(aStrings[1]);
                     }
                 }
+                BlockPosition lPos = Framework.plugin.getPositionMarker("1");
+                if (lPos == null) {
+                    lPos = new BlockPosition(lPlayer.getLocation());
+                } else {
+                    BlockPosition lPos2 = Framework.plugin.getPositionMarker("2");
+                    if (lPos2 != null) {
+                        lPos = lPos.getMinPos(lPos2);
+                    }
+                }
                 if (lWillPlay) {
                     Play lPlay = new Play();
                     lPlay.Area = aAreaList;
                     lPlay.index = lIndex;
                     lPlay.world = lPlayer.getWorld();
-                    lPlay.position = Framework.plugin.getPositionMarker("1");
-                    if (lPlay.position == null) {
-                        lPlay.position = new BlockPosition(lPlayer.getLocation());
-                    } else {
-                        BlockPosition lPos2 = Framework.plugin.getPositionMarker("2");
-                        if (lPos2 != null) {
-                            lPlay.position = lPlay.position.getMinPos(lPos2);
-                        }
-                    }
-                    BlockPosition lPos = lPlay.position.clone();
+                    lPlay.position = lPos;
+                    lPos = lPlay.position.clone();
                     lPos.add(aAreaList.get(lIndex).width, aAreaList.get(lIndex).height, aAreaList.get(lIndex).depth);
                     Framework.plugin.setPositionMarker("1", lPlay.position);
                     Framework.plugin.setPositionMarker("2", lPos);
@@ -79,9 +80,8 @@ public class CommandAreaLoad implements CommandExecutor {
                     Framework.plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(Framework.plugin, lPlay, 20, 40);
                     
                 } else {
-                    aAreaList.toList(lIndex, lList, new BlockPosition(lPlayer.getLocation()));
+                    aAreaList.toList(lIndex, lList, lPos);
                     lList.execute();
-                    BlockPosition lPos = new BlockPosition(lPlayer.getLocation());
                     Framework.plugin.setPositionMarker("1", lPos);
                     lPos.add(aAreaList.get(lIndex).width, aAreaList.get(lIndex).height, aAreaList.get(lIndex).depth);
                     Framework.plugin.setPositionMarker("2", lPos);

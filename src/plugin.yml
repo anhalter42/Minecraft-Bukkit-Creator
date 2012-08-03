@@ -10,6 +10,11 @@ commands:
       usage: /c_markpos <markername>
       permission: c.markpos
       permission-message: You don't have permission
+   c_markbox:
+      description: set current player position for given marker and second marker calculated with whd. 
+      usage: /c_markbox <marker1> <marker2> <width> <height> <depth> 
+      permission: c.markbox
+      permission-message: You don't have permission
    c_area_save:
       description: save area given by marker 1 and 2 to given file. 
       usage: /c_area_save <filename> [<index>|add]
@@ -32,21 +37,31 @@ commands:
       permission-message: You don't have permission
    c_we_fill:
       description: fill region marker 1 to marker 2 with given material. 
-      usage: /c_we_fill <materialname> [<rawmetadata>]
+      usage: /c_we_fill <materialname>|<materialid> [<rawmetadata> [<marker1> <marker2>]]
       permission: c.we_fill
+      permission-message: You don't have permission
+   c_we_markbox:
+      description: fill region marker 1 to marker 2 with marker material. 
+      usage: /c_we_markbox [<marker1> <marker2> [<Materialname>|<Materialid>]]
+      permission: c.we_markbox
       permission-message: You don't have permission
 permissions:
     c.*:
         description: Gives access to all Creator commands
         children:
             c.markpos: true
+            c.markbox: true
             c.area_save: true
             c.area_load: true
             c.area_delete: true
             c.area_remove: true
             c.we_fill: true
+            c.we_markbox: true
     c.markpos:
         description: Allows you to set a marker position
+        default: false
+    c.markbox:
+        description: Allows you to set two marker as a box
         default: false
     c.area_save:
         description: Allows you to save an area
@@ -62,4 +77,7 @@ permissions:
         default: false
     c.we_fill:
         description: Allows you to fill regions of the world
+        default: false
+    c.we_markbox:
+        description: Allows you to mark regions of the world with marker
         default: false

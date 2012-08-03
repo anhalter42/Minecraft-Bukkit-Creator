@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
  *
  * @author andre
  */
-public class CommandSetPosMarker implements CommandExecutor {
+public class CommandMarkPos implements CommandExecutor {
     
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
