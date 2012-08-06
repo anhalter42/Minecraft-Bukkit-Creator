@@ -27,8 +27,9 @@ public class Marker extends DBRecordWorld {
     
     @Override
     protected void fromCSVInternal(DBRecordCSVArray aCols) {
+        super.fromCSVInternal(aCols);
         name = aCols.pop();
         pos = new BlockPosition();
-        pos.fromCSV(aCols.pop(), "\\‚,");
+        pos.fromCSV(aCols.pop(), "\\,");
     }
 }

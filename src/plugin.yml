@@ -42,7 +42,7 @@ commands:
       permission-message: You don't have permission
    c_we_box:
       description: create walls for region marker 1 to marker 2 with material. 
-      usage: /c_we_box <marker1> <marker2> <Materialname>|<Materialid>
+      usage: /c_we_box <walls_nsewtb> <Materialname>|<Materialid> [<rawmetadata> [<marker1> <marker2>]]
       permission: c.we_box
       permission-message: You don't have permission
    c_we_markbox:

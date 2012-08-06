@@ -28,54 +28,73 @@ public class CommandWorldEditBox  implements CommandExecutor {
             SyncBlockList lList = new SyncBlockList(lWorld);
             BlockPosition lPos1, lPos2;
             Material lMat = Material.WOOL;
-            if (aStrings.length > 1) {
-                lPos1 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[0]);
-                lPos2 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[1]);
-                if (aStrings.length > 2) {
-                    lMat = Material.getMaterial(aStrings[2]);
+            lPos1 = CreatorPlugin.plugin.getMarker(lWorld, "1");
+            lPos2 = CreatorPlugin.plugin.getMarker(lWorld, "2");
+            byte lData = 0;
+            boolean lwN = true;
+            boolean lwS = true;
+            boolean lwE = true;
+            boolean lwW = true;
+            boolean lwT = true;
+            boolean lwB = true;
+            if (aStrings.length > 0) {
+                lwN = aStrings[0].contains("n");
+                lwS = aStrings[0].contains("s");
+                lwE = aStrings[0].contains("e");
+                lwW = aStrings[0].contains("w");
+                lwT = aStrings[0].contains("t");
+                lwB = aStrings[0].contains("b");
+                if (aStrings.length > 1) {
+                    lMat = Material.getMaterial(aStrings[1]);
                     if (lMat == null) {
-                        lMat = Material.getMaterial(Integer.parseInt(aStrings[2]));
+                        lMat = Material.getMaterial(Integer.parseInt(aStrings[1]));
+                    } 
+                    if (aStrings.length > 2) {
+                        lData = Byte.parseByte(aStrings[2]);
+                        if (aStrings.length > 4) {
+                            lPos1 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[3]);
+                            lPos2 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[4]);
+                        }
                     }
                 }
-            } else {
-                lPos1 = CreatorPlugin.plugin.getMarker(lWorld, "1");
-                lPos2 = CreatorPlugin.plugin.getMarker(lWorld, "2");
             }
             BlockPosition lWHD = lPos1.getWHD(lPos2);
             lPos1 = lPos1.getMinPos(lPos2);
-            lWHD.add(-1, -1, -1);
             for(int x=0;x<lWHD.x;x++) {
                 BlockPosition lPos;
-                lPos = new BlockPosition(lPos1.x + x, lPos1.y,          lPos1.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + x, lPos1.y + lWHD.y, lPos1.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + x, lPos1.y + lWHD.y, lPos1.z + lWHD.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + x, lPos1.y,          lPos1.z + lWHD.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-            }
-            for(int y=0;y<lWHD.y;y++) {
-                BlockPosition lPos;
-                lPos = new BlockPosition(lPos1.x,          lPos1.y + y, lPos1.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + lWHD.x, lPos1.y + y, lPos1.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + lWHD.x, lPos1.y + y, lPos1.z + lWHD.z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x,          lPos1.y + y, lPos1.z + lWHD.z);
-                lList.add(lPos, lMat, WoolColors.purple);
+                for(int y=0;y<lWHD.y;y++) {
+                    if (lwS) {
+                        lPos = new BlockPosition(lPos1.x + x, lPos1.y + y, lPos1.z);
+                        lList.add(lPos, lMat, lData);
+                    }
+                    if (lwN) {
+                        lPos = new BlockPosition(lPos1.x + x, lPos1.y + y, lPos1.z + lWHD.z - 1);
+                        lList.add(lPos, lMat, lData);
+                    }
+                }
+                for(int z=0;z<lWHD.z;z++) {
+                    if (lwB) {
+                        lPos = new BlockPosition(lPos1.x + x, lPos1.y,              lPos1.z + z);
+                        lList.add(lPos, lMat, lData);
+                    }
+                    if (lwT) {
+                        lPos = new BlockPosition(lPos1.x + x, lPos1.y + lWHD.y - 1, lPos1.z + z);
+                        lList.add(lPos, lMat, lData);
+                    }
+                }
             }
             for(int z=0;z<lWHD.z;z++) {
                 BlockPosition lPos;
-                lPos = new BlockPosition(lPos1.x,          lPos1.y,          lPos1.z + z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + lWHD.x, lPos1.y,          lPos1.z + z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x + lWHD.x, lPos1.y + lWHD.y, lPos1.z + z);
-                lList.add(lPos, lMat, WoolColors.purple);
-                lPos = new BlockPosition(lPos1.x,          lPos1.y + lWHD.y, lPos1.z + z);
-                lList.add(lPos, lMat, WoolColors.purple);
+                for(int y=0;y<lWHD.y;y++) {
+                    if (lwW) {
+                        lPos = new BlockPosition(lPos1.x, lPos1.y + y, lPos1.z + z);
+                        lList.add(lPos, lMat, lData);
+                    }
+                    if (lwE) {
+                        lPos = new BlockPosition(lPos1.x + lWHD.x - 1, lPos1.y + y, lPos1.z + z);
+                        lList.add(lPos, lMat, lData);
+                    }
+                }
             }
             lList.execute();
         }

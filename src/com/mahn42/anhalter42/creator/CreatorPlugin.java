@@ -23,13 +23,13 @@ public class CreatorPlugin extends JavaPlugin {
     }
     
     public static CreatorPlugin plugin = null;
-    public WorldDBList<MarkerDB> DBs; 
+    public WorldDBList<MarkerDB> MarkerDBs; 
 
     @Override
     public void onEnable() { 
         plugin = this;
-        DBs = new WorldDBList<MarkerDB>(MarkerDB.class, this);
-        Framework.plugin.registerSaver(DBs);
+        MarkerDBs = new WorldDBList<MarkerDB>(MarkerDB.class, "CreatorMarker", this);
+        Framework.plugin.registerSaver(MarkerDBs);
         getCommand("c_markpos").setExecutor(new CommandMarkPos());
         getCommand("c_markbox").setExecutor(new CommandMarkBox());
         getCommand("c_area_load").setExecutor(new CommandAreaLoad());
@@ -37,8 +37,9 @@ public class CreatorPlugin extends JavaPlugin {
         getCommand("c_area_delete").setExecutor(new CommandAreaDelete());
         getCommand("c_area_remove").setExecutor(new CommandAreaRemove());
         getCommand("c_we_fill").setExecutor(new CommandWorldEditFill());
+        getCommand("c_we_box").setExecutor(new CommandWorldEditBox());
         getCommand("c_we_markbox").setExecutor(new CommandWorldEditMarkBox());
-        for(MarkerDB lDB : DBs) {
+        for(MarkerDB lDB : MarkerDBs) {
             for(Marker lMarker : lDB) {
                 lDB.setMarker(lMarker.name, lMarker.pos);
             }
@@ -46,12 +47,12 @@ public class CreatorPlugin extends JavaPlugin {
     }
 
     public void setMarker(World aWorld, String name, BlockPosition pos) {
-        MarkerDB lDB = DBs.getDB(aWorld);
+        MarkerDB lDB = MarkerDBs.getDB(aWorld);
         lDB.setMarker(name, pos);
     }
     
     public BlockPosition getMarker(World aWorld, String name) {
-        MarkerDB lDB = DBs.getDB(aWorld);
+        MarkerDB lDB = MarkerDBs.getDB(aWorld);
         Marker lMarker = lDB.getMarker(name);
         return lMarker != null ? lMarker.pos : null;
     } 
