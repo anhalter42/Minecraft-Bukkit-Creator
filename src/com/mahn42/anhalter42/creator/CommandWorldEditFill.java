@@ -6,7 +6,6 @@ package com.mahn42.anhalter42.creator;
 
 import com.mahn42.framework.BlockArea;
 import com.mahn42.framework.BlockPosition;
-import com.mahn42.framework.Framework;
 import com.mahn42.framework.SyncBlockList;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -34,11 +33,11 @@ public class CommandWorldEditFill implements CommandExecutor {
             BlockPosition lEdge1;
             BlockPosition lEdge2;
             if (aStrings.length > 3) {
-                lEdge1 = Framework.plugin.getPositionMarker(aStrings[2]);
-                lEdge2 = Framework.plugin.getPositionMarker(aStrings[3]);
+                lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[2]);
+                lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[3]);
             } else {
-                lEdge1 = Framework.plugin.getPositionMarker("1");
-                lEdge2 = Framework.plugin.getPositionMarker("2");
+                lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, "1");
+                lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, "2");
             }
             BlockArea lArea = new BlockArea(lWorld, lEdge1, lEdge2);
             Material lMat;

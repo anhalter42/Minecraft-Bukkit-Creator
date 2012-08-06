@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
  *
  * @author andre
  */
-public class CommandWorldEditMarkBox  implements CommandExecutor {
+public class CommandWorldEditBox  implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
@@ -43,8 +43,7 @@ public class CommandWorldEditMarkBox  implements CommandExecutor {
             }
             BlockPosition lWHD = lPos1.getWHD(lPos2);
             lPos1 = lPos1.getMinPos(lPos2);
-            lPos1.add(-1, -1, -1);
-            lWHD.add(1, 1, 1);
+            lWHD.add(-1, -1, -1);
             for(int x=0;x<lWHD.x;x++) {
                 BlockPosition lPos;
                 lPos = new BlockPosition(lPos1.x + x, lPos1.y,          lPos1.z);

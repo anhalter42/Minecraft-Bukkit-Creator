@@ -5,7 +5,7 @@
 package com.mahn42.anhalter42.creator;
 
 import com.mahn42.framework.BlockPosition;
-import com.mahn42.framework.Framework;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,6 +21,7 @@ public class CommandMarkPos implements CommandExecutor {
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
             Player lPlayer = (Player)aCommandSender;
+            World lWorld = lPlayer.getWorld();
             if (aStrings.length > 0) {
                 String aName = aStrings[0];
                 BlockPosition lPos;
@@ -28,12 +29,12 @@ public class CommandMarkPos implements CommandExecutor {
                     if (aStrings.length > 3) {
                         lPos = new BlockPosition(Integer.parseInt(aStrings[1]), Integer.parseInt(aStrings[2]), Integer.parseInt(aStrings[3]));
                     } else {
-                        lPos = Framework.plugin.getPositionMarker(aStrings[1]).clone();
+                        lPos = CreatorPlugin.plugin.getMarker(lWorld, aStrings[1]).clone();
                     }
                 } else {
                     lPos = new BlockPosition(lPlayer.getLocation());
                 }
-                Framework.plugin.setPositionMarker(aName, lPos);
+                CreatorPlugin.plugin.setMarker(lWorld, aName, lPos);
                 lPlayer.sendMessage("mark " + aName + " at " + lPos);
             } else {
 

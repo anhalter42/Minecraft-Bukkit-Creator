@@ -7,7 +7,7 @@ depend: [MAHN42-Framework]
 commands:
    c_markpos:
       description: set current player position for given marker. 
-      usage: /c_markpos <markername>
+      usage: /c_markpos <markername> [<sourcemarker>|(<x> <y> <z>)]
       permission: c.markpos
       permission-message: You don't have permission
    c_markbox:
@@ -16,7 +16,7 @@ commands:
       permission: c.markbox
       permission-message: You don't have permission
    c_area_save:
-      description: save area given by marker 1 and 2 to given file. 
+      description: save area given by marker a and b to given file. 
       usage: /c_area_save <filename> [<index>|add]
       permission: c.area_save
       permission-message: You don't have permission
@@ -40,6 +40,11 @@ commands:
       usage: /c_we_fill <materialname>|<materialid> [<rawmetadata> [<marker1> <marker2>]]
       permission: c.we_fill
       permission-message: You don't have permission
+   c_we_box:
+      description: create walls for region marker 1 to marker 2 with material. 
+      usage: /c_we_box <marker1> <marker2> <Materialname>|<Materialid>
+      permission: c.we_box
+      permission-message: You don't have permission
    c_we_markbox:
       description: fill region marker 1 to marker 2 with marker material. 
       usage: /c_we_markbox [<marker1> <marker2> [<Materialname>|<Materialid>]]
@@ -56,6 +61,7 @@ permissions:
             c.area_delete: true
             c.area_remove: true
             c.we_fill: true
+            c.we_box: true
             c.we_markbox: true
     c.markpos:
         description: Allows you to set a marker position
@@ -77,6 +83,9 @@ permissions:
         default: false
     c.we_fill:
         description: Allows you to fill regions of the world
+        default: false
+    c.we_box:
+        description: Allows you to create walls for regions of the world
         default: false
     c.we_markbox:
         description: Allows you to mark regions of the world with marker

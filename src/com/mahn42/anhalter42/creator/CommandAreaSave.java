@@ -6,8 +6,8 @@ package com.mahn42.anhalter42.creator;
 
 import com.mahn42.framework.BlockAreaList;
 import com.mahn42.framework.BlockPosition;
-import com.mahn42.framework.Framework;
 import java.io.File;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,10 +23,11 @@ public class CommandAreaSave implements CommandExecutor {
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
             Player lPlayer = (Player)aCommandSender;
+            World lWorld = lPlayer.getWorld();
             if (aStrings.length > 0) {
                 String aName = aStrings[0];
-                BlockPosition lEdge1 = Framework.plugin.getPositionMarker("1");
-                BlockPosition lEdge2 = Framework.plugin.getPositionMarker("2");
+                BlockPosition lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, "a");
+                BlockPosition lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, "b");
                 if (lEdge1 != null && lEdge2 != null) {
                     BlockAreaList lAreaList = new BlockAreaList();
                     File lFile = new File(aName);

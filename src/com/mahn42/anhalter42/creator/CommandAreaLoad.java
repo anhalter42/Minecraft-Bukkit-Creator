@@ -9,7 +9,6 @@ import com.mahn42.framework.BlockPosition;
 import com.mahn42.framework.Framework;
 import com.mahn42.framework.SyncBlockList;
 import java.io.File;
-import java.util.ArrayList;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -48,6 +47,7 @@ public class CommandAreaLoad implements CommandExecutor {
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
             Player lPlayer = (Player)aCommandSender;
+            World lWorld = lPlayer.getWorld();
             if (aStrings.length > 0) {
                 String aName = aStrings[0];
                 BlockAreaList aAreaList = new BlockAreaList();
@@ -68,11 +68,11 @@ public class CommandAreaLoad implements CommandExecutor {
                         }
                     }
                 }
-                BlockPosition lPos = Framework.plugin.getPositionMarker("1");
+                BlockPosition lPos = CreatorPlugin.plugin.getMarker(lWorld, "a");
                 if (lPos == null) {
                     lPos = new BlockPosition(lPlayer.getLocation());
                 } else {
-                    BlockPosition lPos2 = Framework.plugin.getPositionMarker("2");
+                    BlockPosition lPos2 = CreatorPlugin.plugin.getMarker(lWorld, "b");
                     if (lPos2 != null) {
                         lPos = lPos.getMinPos(lPos2);
                     }
@@ -86,9 +86,9 @@ public class CommandAreaLoad implements CommandExecutor {
                     lPlay.mixed = lMixed;
                     lPos = lPlay.position.clone();
                     lPos.add(aAreaList.get(lIndex).width - 1, aAreaList.get(lIndex).height - 1, aAreaList.get(lIndex).depth - 1);
-                    Framework.plugin.setPositionMarker("1", lPlay.position);
-                    Framework.plugin.setPositionMarker("2", lPos);
-                    lPlayer.sendMessage("File " + aName + " loaded and playing.");
+                    CreatorPlugin.plugin.setMarker(lWorld, "a", lPlay.position);
+                    CreatorPlugin.plugin.setMarker(lWorld, "b", lPos);
+                    lPlayer.sendMessage("File " + aName + " loaded and playing. Marker a + b set.");
                     Framework.plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(Framework.plugin, lPlay, 20, 40);
                     
                 } else {
@@ -98,10 +98,10 @@ public class CommandAreaLoad implements CommandExecutor {
                         aAreaList.toList(lIndex, lList, lPos);
                     }
                     lList.execute();
-                    Framework.plugin.setPositionMarker("1", lPos);
+                    CreatorPlugin.plugin.setMarker(lWorld, "a", lPos);
                     lPos.add(aAreaList.get(lIndex).width - 1, aAreaList.get(lIndex).height - 1, aAreaList.get(lIndex).depth - 1);
-                    Framework.plugin.setPositionMarker("2", lPos);
-                    lPlayer.sendMessage("File " + aName + " loaded.");
+                    CreatorPlugin.plugin.setMarker(lWorld, "b", lPos);
+                    lPlayer.sendMessage("File " + aName + " loaded. Marker a + b set.");
                 }
             } else {
 
