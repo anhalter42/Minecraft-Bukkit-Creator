@@ -44,6 +44,7 @@ public class CreatorPlugin extends JavaPlugin {
                 lDB.setMarker(lMarker.name, lMarker.pos);
             }
         }
+        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
     public void setMarker(World aWorld, String name, BlockPosition pos) {
