@@ -46,7 +46,7 @@ public class CommandWorldEditFill implements CommandExecutor {
                 lMat = Material.getMaterial(Integer.parseInt(aStrings[0]));
             }
             lArea.clear(lMat, lData);
-            lArea.toList(lList, lEdge1.getMinPos(lEdge2));
+            lArea.toList(lList, lEdge1.getMinPos(lEdge2), BlockArea.BlockAreaPlaceMode.full);
             lPlayer.sendMessage("region " + lEdge1 + " - " + lEdge2 + " is filled with " + lMat + " data " + lData);
             lList.execute();
         }

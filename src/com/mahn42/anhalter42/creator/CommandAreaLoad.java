@@ -4,6 +4,7 @@
  */
 package com.mahn42.anhalter42.creator;
 
+import com.mahn42.framework.BlockArea;
 import com.mahn42.framework.BlockAreaList;
 import com.mahn42.framework.BlockPosition;
 import com.mahn42.framework.Framework;
@@ -26,17 +27,13 @@ public class CommandAreaLoad implements CommandExecutor {
         public World world;
         public BlockPosition position;
         public int index = 0;
-        public boolean mixed = false;
+        public BlockArea.BlockAreaPlaceMode mode = BlockArea.BlockAreaPlaceMode.full;
         
         @Override
         public void run() {
             if (index < Area.size()) {
                 SyncBlockList lList = new SyncBlockList(world);
-                if (mixed) {
-                    Area.toListMixed(index, lList, position);
-                } else {
-                    Area.toList(index, lList, position);
-                }
+                Area.toList(index, lList, position, false, false, false, false, mode);
                 lList.execute();
                 index++;
             }
@@ -55,7 +52,7 @@ public class CommandAreaLoad implements CommandExecutor {
                 SyncBlockList lList = new SyncBlockList(lPlayer.getWorld());
                 int lIndex = 0;
                 boolean lWillPlay = false;
-                boolean lMixed = false;
+                BlockArea.BlockAreaPlaceMode lMode = BlockArea.BlockAreaPlaceMode.full;
                 if (aStrings.length > 1) {
                     if (aStrings[1].equalsIgnoreCase("play")) {
                         lWillPlay = true;
@@ -64,7 +61,9 @@ public class CommandAreaLoad implements CommandExecutor {
                     }
                     if (aStrings.length > 2) {
                         if (aStrings[2].equalsIgnoreCase("mixed")) {
-                            lMixed = true;
+                            lMode = BlockArea.BlockAreaPlaceMode.mixed;
+                        } else if (aStrings[2].equalsIgnoreCase("reverse")) {
+                            lMode = BlockArea.BlockAreaPlaceMode.reverse;
                         }
                     }
                 }
@@ -83,7 +82,7 @@ public class CommandAreaLoad implements CommandExecutor {
                     lPlay.index = lIndex;
                     lPlay.world = lPlayer.getWorld();
                     lPlay.position = lPos;
-                    lPlay.mixed = lMixed;
+                    lPlay.mode = lMode;
                     lPos = lPlay.position.clone();
                     lPos.add(aAreaList.get(lIndex).width - 1, aAreaList.get(lIndex).height - 1, aAreaList.get(lIndex).depth - 1);
                     CreatorPlugin.plugin.setMarker(lWorld, "a", lPlay.position);
@@ -92,11 +91,7 @@ public class CommandAreaLoad implements CommandExecutor {
                     Framework.plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(Framework.plugin, lPlay, 20, 40);
                     
                 } else {
-                    if (lMixed) {
-                        aAreaList.toListMixed(lIndex, lList, lPos);
-                    } else {
-                        aAreaList.toList(lIndex, lList, lPos);
-                    }
+                    aAreaList.toList(lIndex, lList, lPos, false, false, false, false, lMode);
                     lList.execute();
                     CreatorPlugin.plugin.setMarker(lWorld, "a", lPos);
                     lPos.add(aAreaList.get(lIndex).width - 1, aAreaList.get(lIndex).height - 1, aAreaList.get(lIndex).depth - 1);
