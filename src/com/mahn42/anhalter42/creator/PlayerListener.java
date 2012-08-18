@@ -28,10 +28,14 @@ public class PlayerListener  implements Listener {
         if (Framework.plugin.isDebugSet("c_target")) {
             Block lTargetBlock = lPlayer.getTargetBlock(null, 100);
             if (lTargetBlock != null && !lTargetBlock.equals(lLastBlock)) {
-                BlockPosition lPos = CreatorPlugin.plugin.getMarker(lWorld, "a");
-                if (lPos != null) {
+                BlockPosition lPos1 = CreatorPlugin.plugin.getMarker(lWorld, "a");
+                BlockPosition lPos2 = CreatorPlugin.plugin.getMarker(lWorld, "b");
+                if (lPos1 != null) {
+                    if (lPos2 != null) {
+                        lPos1 = lPos1.getMinPos(lPos2);
+                    }
                     BlockPosition lTargetPos = new BlockPosition(lTargetBlock.getLocation());
-                    lTargetPos.add(-lPos.x, -lPos.y, -lPos.z);
+                    lTargetPos.add(-lPos1.x, -lPos1.y, -lPos1.z);
                     lPlayer.sendMessage("Block " + lTargetBlock.getType() + lTargetPos);
                 }
                 lLastBlock = lTargetBlock;
