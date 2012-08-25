@@ -41,7 +41,7 @@ commands:
       permission-message: You don't have permission
    c_we_fill:
       description: fill region marker 1 to marker 2 with given material. 
-      usage: /c_we_fill <materialname>|<materialid> [<rawmetadata> [<marker1> <marker2>]]
+      usage: /c_we_fill empty|<materialname>|<materialid> [<rawmetadata> [<marker1> <marker2>]]
       aliases: fill
       permission: c.we_fill
       permission-message: You don't have permission
