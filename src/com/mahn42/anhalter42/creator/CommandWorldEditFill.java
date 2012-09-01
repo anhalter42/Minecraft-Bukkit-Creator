@@ -42,7 +42,10 @@ public class CommandWorldEditFill implements CommandExecutor {
                 lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, "1");
                 lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, "2");
             }
-            BlockArea lArea = new BlockArea(lWorld, lEdge1, lEdge2);
+            lEdge1 = lEdge1.clone();
+            lEdge2 = lEdge2.clone();
+            BlockPosition lWHD = lEdge1.getWHD(lEdge2);
+            BlockArea lArea = new BlockArea(lWHD.x, lWHD.y, lWHD.z);
             Material lMat;
             if (aStrings[0].equalsIgnoreCase("empty")) {
                 lMat = Material.AIR;
