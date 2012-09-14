@@ -51,7 +51,7 @@ public class CommandWorldEditFill implements CommandExecutor {
                 lMat = Material.AIR;
                 lEmpty = true; 
             } else {
-                lMat = Material.getMaterial(aStrings[0]);
+                lMat = Material.getMaterial(aStrings[0].toUpperCase());
                 if (lMat == null) {
                     lMat = Material.getMaterial(Integer.parseInt(aStrings[0]));
                 }
