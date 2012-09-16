@@ -25,7 +25,7 @@ commands:
       permission-message: You don't have permission
    c_area_load:
       description: load area to player location. 
-      usage: /c_area_load <filename> [<index>|play]
+      usage: /c_area_load <filename> [<index>|play [mixed|reverse|full [<marker1> [<marker2>]]]]
       aliases: aload
       permission: c.area_load
       permission-message: You don't have permission
