@@ -57,6 +57,12 @@ commands:
       aliases: mbox
       permission: c.we_markbox
       permission-message: You don't have permission
+   c_teleport:
+      description: teleport player to position and world. 
+      usage: /c_teleport <marker1>|<x> <y> <z> [worldname]
+      aliases: ctp
+      permission: c.teleport
+      permission-message: You don't have permission
 permissions:
     c.*:
         description: Gives access to all Creator commands
@@ -70,6 +76,7 @@ permissions:
             c.we_fill: true
             c.we_box: true
             c.we_markbox: true
+            c.teleport: true
     c.markpos:
         description: Allows you to set a marker position
         default: false
@@ -96,4 +103,7 @@ permissions:
         default: false
     c.we_markbox:
         description: Allows you to mark regions of the world with marker
+        default: false
+    c.teleport:
+        description: Allows you teleport to position and world
         default: false
