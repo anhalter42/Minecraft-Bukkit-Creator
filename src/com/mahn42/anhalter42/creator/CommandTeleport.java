@@ -27,15 +27,15 @@ public class CommandTeleport implements CommandExecutor {
                 BlockPosition lPos;
                 if (aStrings.length > 0) {
                     if (aStrings.length > 2) {
-                        lPos = new BlockPosition(Integer.parseInt(aStrings[0]), Integer.parseInt(aStrings[1]), Integer.parseInt(aStrings[2]));
                         if (aStrings.length > 3) {
                             lWorld = CreatorPlugin.plugin.getServer().getWorld(aStrings[3]);
                         }
+                        lPos = new BlockPosition(Integer.parseInt(aStrings[0]), Integer.parseInt(aStrings[1]), Integer.parseInt(aStrings[2]));
                     } else {
-                        lPos = CreatorPlugin.plugin.getMarker(lWorld, aStrings[0]).clone();
                         if (aStrings.length > 1) {
                             lWorld = CreatorPlugin.plugin.getServer().getWorld(aStrings[1]);
                         }
+                        lPos = CreatorPlugin.plugin.getMarker(lWorld, aStrings[0]).clone();
                     }
                 } else {
                     lPos = new BlockPosition();
