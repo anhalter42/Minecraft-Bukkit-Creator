@@ -32,10 +32,7 @@ public class CommandWorldEditMarkBox  implements CommandExecutor {
                 lPos1 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[0]);
                 lPos2 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[1]);
                 if (aStrings.length > 2) {
-                    lMat = Material.getMaterial(aStrings[2]);
-                    if (lMat == null) {
-                        lMat = Material.getMaterial(Integer.parseInt(aStrings[2]));
-                    }
+                    lMat = CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[2]);
                 }
             } else {
                 lPos1 = CreatorPlugin.plugin.getMarker(lWorld, "1");

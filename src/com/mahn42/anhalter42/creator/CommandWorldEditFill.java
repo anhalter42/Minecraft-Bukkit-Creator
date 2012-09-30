@@ -51,10 +51,7 @@ public class CommandWorldEditFill implements CommandExecutor {
                 lMat = Material.AIR;
                 lEmpty = true; 
             } else {
-                lMat = Material.getMaterial(aStrings[0].toUpperCase());
-                if (lMat == null) {
-                    lMat = Material.getMaterial(Integer.parseInt(aStrings[0]));
-                }
+                lMat = CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[0]);
             }
             lArea.clear(lMat, lData);
             lArea.toList(lList, lEdge1.getMinPos(lEdge2), BlockArea.BlockAreaPlaceMode.full);

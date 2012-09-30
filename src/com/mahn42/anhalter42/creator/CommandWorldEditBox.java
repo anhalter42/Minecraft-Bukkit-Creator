@@ -45,10 +45,7 @@ public class CommandWorldEditBox  implements CommandExecutor {
                 lwT = aStrings[0].contains("t");
                 lwB = aStrings[0].contains("b");
                 if (aStrings.length > 1) {
-                    lMat = Material.getMaterial(aStrings[1].toUpperCase());
-                    if (lMat == null) {
-                        lMat = Material.getMaterial(Integer.parseInt(aStrings[1]));
-                    } 
+                    lMat = CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[1]);
                     if (aStrings.length > 2) {
                         lData = Byte.parseByte(aStrings[2]);
                         if (aStrings.length > 4) {

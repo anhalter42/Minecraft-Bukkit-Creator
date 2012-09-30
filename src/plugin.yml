@@ -51,6 +51,18 @@ commands:
       aliases: box
       permission: c.we_box
       permission-message: You don't have permission
+   c_we_flood:
+      description: flood material trough air like water would flood starting at your focused block. 
+      usage: /c_we_flood <Materialname>|<Materialid> <rawmetadata> [<transparentmat1> [<transparentmat2>...]]
+      aliases: flood
+      permission: c.we_flood
+      permission-message: You don't have permission
+   c_we_replace:
+      description: replace material in area marker1 marker 2 with other material
+      usage: /c_we_replace <Materialname>|<Materialid> <rawmetadata> <ToMaterialname>|<ToMaterialid> <ToRawmetadata>
+      aliases: repl
+      permission: c.we_replace
+      permission-message: You don't have permission
    c_we_markbox:
       description: fill region marker 1 to marker 2 with marker material. 
       usage: /c_we_markbox [<marker1> <marker2> [<Materialname>|<Materialid>]]
@@ -76,6 +88,8 @@ permissions:
             c.we_fill: true
             c.we_box: true
             c.we_markbox: true
+            c.we_flood: true
+            c.we_replace: true
             c.teleport: true
     c.markpos:
         description: Allows you to set a marker position
@@ -103,6 +117,12 @@ permissions:
         default: false
     c.we_markbox:
         description: Allows you to mark regions of the world with marker
+        default: false
+    c.we_flood:
+        description: Allows you to flood region with material of the world with marker
+        default: false
+    c.we_replace:
+        description: Allows you to replace material in region of the world with marker
         default: false
     c.teleport:
         description: Allows you teleport to position and world
