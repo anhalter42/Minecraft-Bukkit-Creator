@@ -43,7 +43,12 @@ public class CommandWorldEditFlood implements CommandExecutor {
                 Player lPlayer = ((Player)aCommandSender); 
                 lWorld = lPlayer.getWorld();
                 List<Block> lastTwoTargetBlocks = lPlayer.getLastTwoTargetBlocks(null, 20);
-                BlockPosition lStart = new BlockPosition(lastTwoTargetBlocks.get(0).getLocation());
+                BlockPosition lStart;
+                if (lTrans.contains(lastTwoTargetBlocks.get(1).getType())) {
+                    lStart = new BlockPosition(lastTwoTargetBlocks.get(1).getLocation());
+                } else {
+                    lStart = new BlockPosition(lastTwoTargetBlocks.get(0).getLocation());
+                }
                 Material lMat = CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[0]);
                 byte lData = Byte.parseByte(aStrings[1]);
                 int lMaxBlocks = 20000;
