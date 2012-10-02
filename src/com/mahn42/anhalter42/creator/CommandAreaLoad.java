@@ -40,6 +40,7 @@ public class CommandAreaLoad implements CommandExecutor {
         }
     }
     
+    // /c_area_load <filename> [<index>|play [mixed|reverse|full [<marker1> [<marker2>]]]]
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
@@ -47,6 +48,9 @@ public class CommandAreaLoad implements CommandExecutor {
             World lWorld = lPlayer.getWorld();
             if (aStrings.length > 0) {
                 String aName = aStrings[0];
+                if (!aName.endsWith(".frm")) {
+                    aName = aName + ".frm";
+                }
                 BlockAreaList aAreaList = new BlockAreaList();
                 aAreaList.load(new File(aName));
                 SyncBlockList lList = new SyncBlockList(lPlayer.getWorld());

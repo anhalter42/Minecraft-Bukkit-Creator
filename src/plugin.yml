@@ -19,7 +19,7 @@ commands:
       permission-message: You don't have permission
    c_area_save:
       description: save area given by marker a and b to given file. 
-      usage: /c_area_save <filename> [<index>|add]
+      usage: /c_area_save <filename> [<index>|add [<marker1> <marker2>]]
       aliases: asave
       permission: c.area_save
       permission-message: You don't have permission
@@ -75,6 +75,12 @@ commands:
       aliases: ctp
       permission: c.teleport
       permission-message: You don't have permission
+   c_explode:
+      description: create an explosion where your focus is. 
+      usage: /c_explode [power]
+      aliases: explode
+      permission: c.explode
+      permission-message: You don't have permission
 permissions:
     c.*:
         description: Gives access to all Creator commands
@@ -91,6 +97,7 @@ permissions:
             c.we_flood: true
             c.we_replace: true
             c.teleport: true
+            c.explode: true
     c.markpos:
         description: Allows you to set a marker position
         default: false
@@ -126,4 +133,7 @@ permissions:
         default: false
     c.teleport:
         description: Allows you teleport to position and world
+        default: false
+    c.explode:
+        description: Allows you create an explosion
         default: false

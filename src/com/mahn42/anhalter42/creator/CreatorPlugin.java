@@ -49,6 +49,9 @@ public class CreatorPlugin extends JavaPlugin {
         getCommand("c_we_replace").setExecutor(new CommandWorldEditReplace());
         
         getCommand("c_teleport").setExecutor(new CommandTeleport());
+
+        getCommand("c_explode").setExecutor(new CommandExplode());
+        
         for(MarkerDB lDB : MarkerDBs) {
             for(Marker lMarker : lDB) {
                 lDB.setMarker(lMarker.name, lMarker.pos);

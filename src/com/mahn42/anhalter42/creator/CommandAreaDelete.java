@@ -19,7 +19,11 @@ public class CommandAreaDelete implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aStrings.length > 0) {
-            File lFile = new File(aStrings[0]);
+            String aName = aStrings[0];
+            if (!aName.endsWith(".frm")) {
+                aName = aName + ".frm";
+            }
+            File lFile = new File(aName);
             if (lFile.exists()) {
                 Framework.plugin.getLogger().info("delete area file " + aStrings[0] + "!");
                 lFile.delete();

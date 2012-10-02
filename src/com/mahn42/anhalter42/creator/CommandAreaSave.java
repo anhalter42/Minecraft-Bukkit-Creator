@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
  * @author andre
  */
 public class CommandAreaSave implements CommandExecutor {
-    
+    // /c_area_save <filename> [<index>|add [<marker1> <marker2>]]
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
@@ -26,8 +26,18 @@ public class CommandAreaSave implements CommandExecutor {
             World lWorld = lPlayer.getWorld();
             if (aStrings.length > 0) {
                 String aName = aStrings[0];
-                BlockPosition lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, "a");
-                BlockPosition lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, "b");
+                if (!aName.endsWith(".frm")) {
+                    aName = aName + ".frm";
+                }
+                BlockPosition lEdge1 = null;
+                BlockPosition lEdge2 = null;
+                if (aStrings.length > 3) {
+                    lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[2]);
+                    lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, aStrings[3]);
+                } else {
+                    lEdge1 = CreatorPlugin.plugin.getMarker(lWorld, "a");
+                    lEdge2 = CreatorPlugin.plugin.getMarker(lWorld, "b");
+                }
                 if (lEdge1 != null && lEdge2 != null) {
                     BlockAreaList lAreaList = new BlockAreaList();
                     File lFile = new File(aName);
