@@ -29,9 +29,28 @@ public class CommandWorldEditFlood implements CommandExecutor {
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
             if (aStrings.length > 1) {
+                BlockPositionDelta[] mode = BlockPositionDelta.HorizontalAndDown;
+                int lSIndex = 0;
+                if (aStrings[lSIndex].startsWith("mode=")) {
+                    String aMode = aStrings[lSIndex].substring(5).toLowerCase();
+                    if (aMode.equals("hd")) { // HorizontalAndDown
+                        mode = BlockPositionDelta.HorizontalAndDown;
+                    } else if (aMode.equals("h")) { // Horizontal
+                        mode = BlockPositionDelta.Horizontal;
+                    } else if (aMode.equals("hu")) { // HorizontalAndUp
+                        mode = BlockPositionDelta.HorizontalAndUp;
+                    } else if (aMode.equals("hv")) { // HorizontalAndVertical
+                        mode = BlockPositionDelta.HorizontalAndVertical;
+                    } else if (aMode.equals("hvd")) { // HorizontalAndVerticalAndDiagonal
+                        mode = BlockPositionDelta.HorizontalAndVerticalAndDiagonal;
+                    } else if (aMode.equals("dh")) { // DiagonalHorizontal
+                        mode = BlockPositionDelta.DiagonalHorizontal;
+                    }
+                    lSIndex++;
+                }
                 ArrayList<Material> lTrans = new ArrayList<Material>();
-                if (aStrings.length > 2) {
-                    int lIndex = 2;
+                if (aStrings.length > (lSIndex + 2)) {
+                    int lIndex = lSIndex + 2;
                     while (lIndex < aStrings.length) {
                         lTrans.add(CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[lIndex]));
                         lIndex++;
@@ -49,8 +68,8 @@ public class CommandWorldEditFlood implements CommandExecutor {
                 } else {
                     lStart = new BlockPosition(lastTwoTargetBlocks.get(0).getLocation());
                 }
-                Material lMat = CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[0]);
-                byte lData = Byte.parseByte(aStrings[1]);
+                Material lMat = CreatorPlugin.plugin.getMaterialForPlayer(aCommandSender, aStrings[lSIndex]);
+                byte lData = Byte.parseByte(aStrings[lSIndex + 1]);
                 int lMaxBlocks = 20000;
                 ArrayList<BlockPosition> lStack = new ArrayList<BlockPosition>();
                 ArrayList<BlockPosition> lAll = new ArrayList<BlockPosition>();
@@ -60,7 +79,7 @@ public class CommandWorldEditFlood implements CommandExecutor {
                     for(BlockPosition lpos : lStack) {
                         if (lTrans.contains(lpos.getBlockType(lWorld))) {
                             lAll.add(lpos);
-                            for(BlockPosition lnp : new BlockPositionWalkAround(lpos, BlockPositionDelta.HorizontalAndDown)) {
+                            for(BlockPosition lnp : new BlockPositionWalkAround(lpos, mode)) {
                                 if (!lNext.contains(lnp) && !lAll.contains(lnp)) {
                                     Material lnpm = lnp.getBlockType(lWorld);
                                     if (lTrans.contains(lnpm)) {
