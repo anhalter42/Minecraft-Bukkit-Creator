@@ -2,7 +2,7 @@
 ---
 name: Creator
 main: com.mahn42.anhalter42.creator.CreatorPlugin
-version: 0.01
+version: 0.1
 depend: [MAHN42-Framework]
 commands:
    c_markpos:
