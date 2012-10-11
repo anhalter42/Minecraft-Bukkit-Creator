@@ -35,7 +35,12 @@ public class CommandTeleport implements CommandExecutor {
                         if (aStrings.length > 1) {
                             lWorld = CreatorPlugin.plugin.getServer().getWorld(aStrings[1]);
                         }
-                        lPos = CreatorPlugin.plugin.getMarker(lWorld, aStrings[0]).clone();
+                        lPos = CreatorPlugin.plugin.getMarker(lWorld, aStrings[0]);
+                        if (lPos != null) {
+                            lPos = lPos.clone();
+                        } else {
+                            lPlayer.sendMessage("Unkown marker " + aStrings[0] + " in world " + lWorld.getName());
+                        }
                     }
                 } else {
                     lPos = new BlockPosition();

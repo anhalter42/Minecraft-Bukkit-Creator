@@ -17,6 +17,12 @@ commands:
       aliases: mb
       permission: c.markbox
       permission-message: You don't have permission
+   c_marklist:
+      description: list all markers in world
+      usage: /c_marklist [<worldname>]
+      aliases: mplist
+      permission: c.marklist
+      permission-message: You don't have permission
    c_area_save:
       description: save area given by marker a and b to given file. 
       usage: /c_area_save <filename> [<index>|add [<marker1> <marker2>]]
@@ -87,6 +93,7 @@ permissions:
         children:
             c.markpos: true
             c.markbox: true
+            c.marklist: true
             c.area_save: true
             c.area_load: true
             c.area_delete: true
@@ -100,6 +107,9 @@ permissions:
             c.explode: true
     c.markpos:
         description: Allows you to set a marker position
+        default: false
+    c.marklist:
+        description: Allows you to list all marker in a world
         default: false
     c.markbox:
         description: Allows you to set two marker as a box

@@ -36,6 +36,7 @@ public class CreatorPlugin extends JavaPlugin {
         Framework.plugin.registerSaver(MarkerDBs);
         getCommand("c_markpos").setExecutor(new CommandMarkPos());
         getCommand("c_markbox").setExecutor(new CommandMarkBox());
+        getCommand("c_marklist").setExecutor(new CommandMarkerList());
         
         getCommand("c_area_load").setExecutor(new CommandAreaLoad());
         getCommand("c_area_save").setExecutor(new CommandAreaSave());
