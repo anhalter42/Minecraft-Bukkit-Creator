@@ -75,6 +75,12 @@ commands:
       aliases: mbox
       permission: c.we_markbox
       permission-message: You don't have permission
+   c_we_parea_create:
+      description: create projection area
+      usage: /c_we_parea_create <marker1> <marker2> <marker3>
+      aliases: pacreate
+      permission: c.we_parea_create
+      permission-message: You don't have permission
    c_teleport:
       description: teleport player to position and world. 
       usage: /c_teleport <marker1>|<x> <y> <z> [worldname]
@@ -103,6 +109,7 @@ permissions:
             c.we_markbox: true
             c.we_flood: true
             c.we_replace: true
+            c.we_parea_create: true
             c.teleport: true
             c.explode: true
     c.markpos:
@@ -140,6 +147,9 @@ permissions:
         default: false
     c.we_replace:
         description: Allows you to replace material in region of the world with marker
+        default: false
+    c.we_parea_create:
+        description: Allows you to create projection area
         default: false
     c.teleport:
         description: Allows you teleport to position and world
