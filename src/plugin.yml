@@ -76,8 +76,8 @@ commands:
       permission: c.we_markbox
       permission-message: You don't have permission
    c_we_parea_create:
-      description: create projection area
-      usage: /c_we_parea_create <marker1> <marker2> <marker3>
+      description: create projection area (v = vector, s = scale)
+      usage: /c_we_parea_create <marker1> <marker2> <markerdest> [<vx,vy,vz> [<sx,sy,sz>]]
       aliases: pacreate
       permission: c.we_parea_create
       permission-message: You don't have permission
