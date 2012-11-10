@@ -49,6 +49,7 @@ public class CreatorPlugin extends JavaPlugin {
         getCommand("c_we_flood").setExecutor(new CommandWorldEditFlood());
         getCommand("c_we_replace").setExecutor(new CommandWorldEditReplace());
         getCommand("c_we_parea_create").setExecutor(new CommandProjectionAreaCreate());
+        getCommand("c_we_rregion_create").setExecutor(new CommandRestrictedRegionCreate());
         
         getCommand("c_teleport").setExecutor(new CommandTeleport());
 

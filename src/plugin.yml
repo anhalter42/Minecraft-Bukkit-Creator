@@ -81,6 +81,12 @@ commands:
       aliases: pacreate
       permission: c.we_parea_create
       permission-message: You don't have permission
+   c_we_rregion_create:
+      description: create restricted region
+      usage: /c_we_rregion_create <marker1> <marker2> [<material1>...]
+      aliases: rrcreate
+      permission: c.we_rregion_create
+      permission-message: You don't have permission
    c_teleport:
       description: teleport player to position and world. 
       usage: /c_teleport <marker1>|<x> <y> <z> [worldname]
@@ -110,6 +116,7 @@ permissions:
             c.we_flood: true
             c.we_replace: true
             c.we_parea_create: true
+            c.we_rregion_create: true
             c.teleport: true
             c.explode: true
     c.markpos:
@@ -150,6 +157,9 @@ permissions:
         default: false
     c.we_parea_create:
         description: Allows you to create projection area
+        default: false
+    c.we_rregion_create:
+        description: Allows you to create restricted region
         default: false
     c.teleport:
         description: Allows you teleport to position and world

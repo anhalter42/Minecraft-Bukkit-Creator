@@ -20,6 +20,8 @@ import org.bukkit.entity.Player;
  * @author andre
  */
 public class CommandProjectionAreaCreate implements CommandExecutor {
+    
+    //pacreate <m1> <m2> <md> [<x,y,z> | [<x,y,z>]]
     @Override
     public boolean onCommand(CommandSender aCommandSender, Command aCommand, String aString, String[] aStrings) {
         if (aCommandSender instanceof Player) {
@@ -31,6 +33,16 @@ public class CommandProjectionAreaCreate implements CommandExecutor {
                 BlockPosition lDest = CreatorPlugin.plugin.getMarker(lWorld, aStrings[2]);
                 ProjectionAreas lAreas = Framework.plugin.getProjectionAreas(lWorld, true);
                 ProjectionArea lArea = new ProjectionArea(new BlockRect(lEdge1, lEdge2), lDest);
+                if (aStrings.length > 3) {
+                    BlockPosition lv = new BlockPosition();
+                    lv.fromCSV(aStrings[3], "\\,");
+                    lArea.vector = lv.getVector();
+                    if (aStrings.length > 4) {
+                        BlockPosition ls = new BlockPosition();
+                        ls.fromCSV(aStrings[4], "\\,");
+                        lArea.scale = ls.getVector();
+                    }                    
+                }
                 lAreas.add(lArea);
             }
         }
