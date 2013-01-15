@@ -55,6 +55,8 @@ public class CreatorPlugin extends JavaPlugin {
 
         getCommand("c_explode").setExecutor(new CommandExplode());
         
+        Framework.plugin.registerMarkerStorage(new MarkerStorage());
+
         for(MarkerDB lDB : MarkerDBs) {
             for(Marker lMarker : lDB) {
                 lDB.setMarker(lMarker.name, lMarker.pos);

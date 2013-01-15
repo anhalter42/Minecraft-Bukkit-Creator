@@ -5,8 +5,10 @@
 package com.mahn42.anhalter42.creator;
 
 import com.mahn42.framework.BlockPosition;
+import com.mahn42.framework.BlockRect;
 import com.mahn42.framework.DBSetWorld;
 import java.io.File;
+import java.util.ArrayList;
 import org.bukkit.World;
 
 /**
@@ -39,5 +41,15 @@ public class MarkerDB extends DBSetWorld<Marker> {
             addRecord(lMarker);
         }
         lMarker.pos = aPos.clone();
+    }
+
+    public ArrayList<Marker> getMarkers(BlockRect aArea) {
+        ArrayList<Marker> lResult = new ArrayList<Marker>();
+        for(Marker lMark : this) {
+            if (aArea.isBetween(lMark.pos)) {
+                lResult.add(lMark);
+            }
+        }
+        return lResult;
     }
 }
