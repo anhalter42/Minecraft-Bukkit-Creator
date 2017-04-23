@@ -10,6 +10,7 @@ import com.mahn42.framework.BlockPositionWalkAround;
 import com.mahn42.framework.Framework;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -61,7 +62,7 @@ public class CommandWorldEditFlood implements CommandExecutor {
                 World lWorld;
                 Player lPlayer = ((Player)aCommandSender); 
                 lWorld = lPlayer.getWorld();
-                List<Block> lastTwoTargetBlocks = lPlayer.getLastTwoTargetBlocks(null, 20);
+                List<Block> lastTwoTargetBlocks = lPlayer.getLastTwoTargetBlocks((Set<Material>)null, 20);
                 BlockPosition lStart;
                 if (lTrans.contains(lastTwoTargetBlocks.get(1).getType())) {
                     lStart = new BlockPosition(lastTwoTargetBlocks.get(1).getLocation());

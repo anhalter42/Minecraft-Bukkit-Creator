@@ -5,7 +5,9 @@
 package com.mahn42.anhalter42.creator;
 
 import java.util.List;
+import java.util.Set;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -25,7 +27,7 @@ public class CommandExplode  implements CommandExecutor {
         if (aCommandSender instanceof Player) {
             Player lPlayer = (Player)aCommandSender;
             World lWorld = lPlayer.getWorld();
-            List<Block> lastTwoTargetBlocks = lPlayer.getLastTwoTargetBlocks(null, 200);
+            List<Block> lastTwoTargetBlocks = lPlayer.getLastTwoTargetBlocks((Set<Material>)null, 200);
             Location location = lastTwoTargetBlocks.get(lastTwoTargetBlocks.size()-1).getLocation();
             float lPower = 4;
             if (aStrings.length > 0) {

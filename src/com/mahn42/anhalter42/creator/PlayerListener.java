@@ -6,6 +6,8 @@ package com.mahn42.anhalter42.creator;
 
 import com.mahn42.framework.BlockPosition;
 import com.mahn42.framework.Framework;
+import java.util.Set;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,7 +28,7 @@ public class PlayerListener  implements Listener {
         Player lPlayer = aEvent.getPlayer();
         World lWorld = lPlayer.getWorld();
         if (Framework.plugin.isDebugSet("c_target")) {
-            Block lTargetBlock = lPlayer.getTargetBlock(null, 100);
+            Block lTargetBlock = lPlayer.getTargetBlock((Set<Material>)null, 100);
             if (lTargetBlock != null && !lTargetBlock.equals(lLastBlock)) {
                 BlockPosition lPos1 = CreatorPlugin.plugin.getMarker(lWorld, "a");
                 BlockPosition lPos2 = CreatorPlugin.plugin.getMarker(lWorld, "b");
