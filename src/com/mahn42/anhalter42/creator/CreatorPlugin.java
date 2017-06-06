@@ -80,7 +80,7 @@ public class CreatorPlugin extends JavaPlugin {
         if (aSender instanceof Player && aName.length() == 2 && aName.startsWith("m")) {
             int lI = Integer.parseInt(aName.substring(1, 2));
             if (lI == 0) {
-                return ((Player)aSender).getItemInHand().getType();
+                return ((Player)aSender).getInventory().getItemInMainHand().getType();
             } else {
                 lI--;
                 PlayerInventory lInv = ((Player)aSender).getInventory();
